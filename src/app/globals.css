@@ -1,0 +1,137 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --clr-primary: #FEBBCC;
+  --clr-secondary: #FFDDCC;
+  --clr-primary-light: #FFCCCC;
+  --clr-secondary-light: #FFEECC;
+  --cosmetic-background: url('../public/images/cosmetic_background.jpg');
+  --I04: url('../public/images/bg-04.jpg');
+  --I05: url('../public/images/bg-05.jpg');
+  --contact-us: url('../public/images/contact-us.jpg');
+  
+}
+
+
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type='number'],
+select {
+  @apply w-full block py-3 px-4 my-3 border rounded-2xl;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type='number']:focus,
+select:focus {
+  @apply outline-none;
+}
+
+
+
+
+input[type="text"]:disabled,
+input[type="password"]:disabled,
+input[type="email"]:disabled,
+input[type="tel"]:disabled,
+input[type='number']:disabled,
+select:disabled {
+  @apply bg-slate-400;
+}
+
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+/* } */
+
+
+button:hover {
+  @apply bg-opacity-70;
+}
+
+
+
+button.primary,
+button[type="submit"] {
+  @apply block py-3 px-4 my-3 bg-primary text-center border-none rounded-2xl;
+}
+
+button.secondary {
+  @apply block py-3 px-4 my-3 bg-secondary text-center border-none rounded-2xl;
+}
+
+button.primary:hover {
+  @apply bg-primary-light;
+}
+
+button.secondary:hover {
+  @apply bg-secondary-light;
+}
+
+
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  top: -1rem;
+  left: 0;
+  background-color: var(--clr-primary);
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--clr-primary-light);
+}
+
+.nav-link:hover::before {
+  width: 100%;
+}
+
+
+.scrollbarX::-webkit-scrollbar {
+  display: none;
+}
+
+
+h3 {
+  @apply text-2xl font-semibold text-gray-400;
+}
+
+h1 {
+  @apply text-6xl font-bold;
+}
+
+p {
+  @apply text-lg font-normal;
+}
+
+
+div.tabs > * {
+  @apply duration-75;
+}
+
+div.tabs >*.active {
+  @apply text-blue-700;
+}
