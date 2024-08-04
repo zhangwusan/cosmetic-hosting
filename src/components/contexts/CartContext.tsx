@@ -39,11 +39,11 @@ class CartService {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ userId, productCart }),
             });
-
+            console.log(response)
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            return await response.json();
+            return "the cart was added successfully";
         } catch (error) {
             console.error("Failed to add product to cart:", error);
             throw new Error("Failed to add product to cart");

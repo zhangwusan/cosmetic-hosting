@@ -1,3 +1,4 @@
+import connectToMongoDB from "@/libs/connectDB";
 import User from "@/models/User";
 import mongoose, { ObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
@@ -19,12 +20,11 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ message: "Internal Server Error!", error: error }, { status: 500 });
     }
 }
-
-// Handle POST request to add a product to the user's cart
 export async function POST(req: NextRequest) {
+    await connectToMongoDB() // Ensure database is connected
+
     try {
         const data = await req.json();
-
         const { userId, productCart } = data;
 
         if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
@@ -48,11 +48,14 @@ export async function POST(req: NextRequest) {
         const productIdObject = productCart._id.toString();
 
         user.products?.push({ id: productIdObject, quantity: productCart.quantity || 1 });
-        await user.save();
 
-        return NextResponse.json({ message: "Product added to cart", productCart });
+        const response_save = await user.save({validateModifiedOnly: true});
+        console.log("response_save:", response_save);
+
+        return NextResponse.json({ message: "Product added to cart" });
     } catch (error) {
-        return NextResponse.json({ message: "Internal Server Error!", error: error }, { status: 500 });
+        console.error("Error adding product to cart:", error);
+        return NextResponse.json({ message: "Internal Server Error!", error: (error as Error).message }, { status: 500 });
     }
 }
 
